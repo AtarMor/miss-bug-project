@@ -1,72 +1,10 @@
 [
     {
-        "title": "bug",
-        "description": "bugbug",
-        "severity": 5,
-        "createdAt": 1710787564240,
-        "_id": "mh0WM"
-    },
-    {
-        "title": "last bug",
-        "severity": 2,
-        "createdAt": 1710787349481,
-        "_id": "camTe"
-    },
-    {
-        "title": "bug",
-        "severity": 4,
-        "createdAt": 1710787253303,
-        "_id": "L5tCE"
-    },
-    {
-        "title": "a",
-        "severity": 1,
-        "createdAt": 1710787140706,
-        "_id": "ECC1v"
-    },
-    {
-        "title": "q",
-        "severity": 1,
-        "createdAt": 1710787121782,
-        "_id": "FJ4bb"
-    },
-    {
-        "title": "ee",
+        "title": "Cannot save a new car",
         "severity": 3,
-        "createdAt": 1710787061487,
-        "_id": "1OZpg"
-    },
-    {
-        "title": "a",
-        "severity": 2,
-        "createdAt": 1710786976277,
-        "_id": "FYwzg"
-    },
-    {
-        "title": "sss",
-        "severity": 3,
-        "createdAt": 1710786108168,
-        "_id": "LwkEP"
-    },
-    {
-        "title": "fff",
-        "description": "each time more or less It bit by bit had The sky each time The sky It a different story from various people All it and the color of television the port was . each time . more or less a dead channel was All a different story as generally All . . was tuned as generally this happened a different story in such cases above the port the color of television bit by bit a different story It tuned . as generally this happened in such cases tuned . the color of television as generally burn as generally more or less the port and bit by bit in such cases I the port the port was was to it was bit by bit and was . and was and this happened the port It tuned . a pleasure I it to a different story a pleasure bit by bit from various people the color of television . had I was was . The sky above was more or less a pleasure was to burn ",
-        "severity": 5,
-        "createdAt": 1710786063642,
-        "_id": "aaPsd"
-    },
-    {
-        "title": "bbb",
-        "severity": 3,
-        "createdAt": 1710785457918,
-        "_id": "ffgzR"
-    },
-    {
-        "title": "aaa",
-        "description": "The sky the port . happens was above I All All bit by bit tuned as generally a different story I It it the port and was more or less was . burn to had the color of television to had All in such cases burn I had . to it above from various people above had happens it to a dead channel bit by bit It a dead channel had a different story as generally was from various people . in such cases . a different story a dead channel was It a dead channel as generally each time from various people it to All in such cases was was as generally the story as generally it All All the port more or less a different story this happened happens more or less was burn happens happens the story a different story . a dead channel more or less I was It bit by bit above as generally . the port was a pleasure ",
-        "severity": 4,
-        "createdAt": 1710785399755,
-        "_id": "e0rrs"
+        "description": "problem when clicking Save",
+        "createdAt": 1542107359454,
+        "_id": "abc123"
     },
     {
         "title": "Infinite Loop Detected",

@@ -5,7 +5,9 @@ import {loggerService} from ".//services/logger.service.js"
 
 const app = express()
 
-app.get('/', (req, res) => res.send('Hello there'))
+app.use(express.static('public'))
+
+// app.get('/', (req, res) => res.send('Hello there'))
 
 app.listen(3030, () => console.log('Server ready at port 3030'))
 
@@ -21,6 +23,7 @@ app.get('/api/bug', (req, res) => {
 })
 
 app.get('/api/bug/save', (req, res) => {
+    console.log('req.query:', req.query)
     const bugToSave = {
         title: req.query.title,
         description: req.query.description,
