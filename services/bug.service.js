@@ -4,13 +4,29 @@ import { utilService } from "./utils.service.js";
 
 export const bugService = {
     query,
-    save
+    save,
+    getById,
+    remove
 }
 
 const bugs = utilService.readJsonFile('data/bug.json')
 
 function query() {
     return Promise.resolve(bugs)
+}
+
+function getById(id) {
+    console.log('id:', id)
+    const bug = bugs.find(bug => bug._id === id)
+    console.log('bug:', bug)
+    if (!bug) return Promise.reject('Bug does not exist!')
+    return Promise.resolve(bug)
+}
+
+function remove(id) {
+    const bugIdx = bugs.findIndex(bug => bug._id === id)
+    bugs.splice(bugIdx, 1)
+    return _saveBugsToFile()
 }
 
 function save(bug) {

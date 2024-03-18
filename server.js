@@ -1,6 +1,8 @@
 import express from 'express'
 
 import {bugService} from ".//services/bug.service.js"
+import {loggerService} from ".//services/logger.service.js"
+
 const app = express()
 
 app.get('/', (req, res) => res.send('Hello there'))
@@ -34,6 +36,24 @@ app.get('/api/bug/save', (req, res) => {
         })
  })
 
-app.get('/api/bug/:bugId', (req, res) => { })
+app.get('/api/bug/:id', (req, res) => { 
+    const bugId = req.params.id
+    console.log('req.params:', req.params)
+    console.log('bugId:', bugId)
+    bugService.getById(bugId)
+        .then(bug => res.send(bug))
+        .catch(err => {
+            loggerService.error(err)
+            res.status(400).send('Cannot get bug')
+        })
+})
 
-app.get('/api/bug/:bugId/remove', (req, res) => { })
+app.get('/api/bug/:id/remove', (req, res) => { 
+    const bugId = req.params.id
+    bugService.remove(bugId)
+        .then(() => res.send(bugId))
+        .catch((err) => {
+            loggerService.error('Cannot remove bug', err)
+            res.status(400).send('Cannot remove bug')
+        })
+})
