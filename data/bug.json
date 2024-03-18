@@ -2,14 +2,15 @@
     {
         "title": "bug",
         "description": "bugbug",
-        "severity": 5,
-        "createdAt": 1710787564240,
+        "severity": 4,
+        "createdAt": "1710787564240",
         "_id": "mh0WM"
     },
     {
         "title": "last bug",
-        "severity": 2,
-        "createdAt": 1710787349481,
+        "description": "undefined",
+        "severity": 0,
+        "createdAt": "1710787349481",
         "_id": "camTe"
     },
     {
