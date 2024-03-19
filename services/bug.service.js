@@ -13,9 +13,16 @@ const PAGE_SIZE = 2
 
 const bugs = utilService.readJsonFile('data/bug.json')
 
-function query(filterBy) {
+function query(filterBy, sortBy) {
     console.log('filterBy:', filterBy)
     let bugsToReturn = bugs
+    if (filterBy) bugsToReturn = filterBugs(bugsToReturn, filterBy)
+    if (sortBy) bugsToReturn = sortBugs(bugsToReturn, sortBy)
+
+    return Promise.resolve(bugsToReturn)
+}
+
+function filterBugs(bugsToReturn, filterBy) {
     if (filterBy.title) {
         const regex = new RegExp(filterBy.title, 'i')
         bugsToReturn = bugsToReturn.filter(bug => regex.test(bug.title))
@@ -27,17 +34,35 @@ function query(filterBy) {
         const regex = new RegExp(filterBy.desc, 'i')
         bugsToReturn = bugsToReturn.filter(bug => regex.test(bug.description))
     }
-    if (filterBy.label) {
-        bugsToReturn = bugsToReturn.filter(bug =>
-            bug.labels.some(label =>
-                label.includes(filterBy.label)))
+    console.log('filterBy.labels:', filterBy.labels)
+    if (filterBy.labels && filterBy.labels.length) {
+        filterBy.labels.forEach(label => {
+            bugsToReturn = bugsToReturn.filter(bug => bug.labels.includes(label))
+        })
     }
+    // if (filterBy.label) {
+    //     bugsToReturn = bugsToReturn.filter(bug =>
+    //         bug.labels.some(label =>
+    //             label.includes(filterBy.label)))
+    // }
+
     if (filterBy.pageIdx !== undefined) {
         const pageIdx = +filterBy.pageIdx
         const startIdx = pageIdx * PAGE_SIZE
         bugsToReturn = bugsToReturn.slice(startIdx, startIdx + PAGE_SIZE)
     }
-    return Promise.resolve(bugsToReturn)
+    return bugsToReturn
+}
+
+function sortBugs(bugsToReturn, sortBy) {
+    if (sortBy.sortBy === 'title') bugsToReturn.sort((bug1, bug2) =>
+        (bug1.title.localeCompare(bug2.title)) * sortBy.sortDir)
+    else if (sortBy.sortBy === 'severity') bugsToReturn.sort((bug1, bug2) =>
+        (bug1.severity - bug2.severity) * sortBy.sortDir)
+    else if (sortBy.sortBy === 'createdAt') bugsToReturn.sort((bug1, bug2) =>
+        (bug1.createdAt - bug2.createdAt) * sortBy.sortDir)
+
+    return bugsToReturn
 }
 
 function getById(id) {
@@ -50,6 +75,7 @@ function getById(id) {
 
 function remove(id) {
     const bugIdx = bugs.findIndex(bug => bug._id === id)
+    if (bugIdx === -1) return Promise.reject('canot finddd')
     bugs.splice(bugIdx, 1)
     return _saveBugsToFile()
 }
