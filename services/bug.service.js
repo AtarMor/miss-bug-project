@@ -9,6 +9,8 @@ export const bugService = {
     remove
 }
 
+const PAGE_SIZE = 2
+
 const bugs = utilService.readJsonFile('data/bug.json')
 
 function query(filterBy) {
@@ -29,6 +31,11 @@ function query(filterBy) {
         bugsToReturn = bugsToReturn.filter(bug =>
             bug.labels.some(label =>
                 label.includes(filterBy.label)))
+    }
+    if (filterBy.pageIdx !== undefined) {
+        const pageIdx = +filterBy.pageIdx
+        const startIdx = pageIdx * PAGE_SIZE
+        bugsToReturn = bugsToReturn.slice(startIdx, startIdx + PAGE_SIZE)
     }
     return Promise.resolve(bugsToReturn)
 }
