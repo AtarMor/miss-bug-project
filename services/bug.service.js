@@ -75,7 +75,7 @@ function getById(id) {
 
 function remove(id) {
     const bugIdx = bugs.findIndex(bug => bug._id === id)
-    if (bugIdx === -1) return Promise.reject('canot finddd')
+    if (bugIdx === -1) return Promise.reject('cannot find the bug')
     bugs.splice(bugIdx, 1)
     return _saveBugsToFile()
 }
