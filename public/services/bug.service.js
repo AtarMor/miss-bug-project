@@ -38,11 +38,8 @@ function remove(bugId) {
 }
 
 function save(bug) {
-    console.log('bug:from save', bug)
     const url = BASE_URL + 'save'
-    console.log('url:', url)
     let queryParams = `?title=${bug.title}&severity=${bug.severity}&description=${bug.description}&createdAt=${bug.createdAt}`
-    console.log('queryParams:', queryParams)
     if (bug._id) {
         queryParams += `&_id=${bug._id}`
     }
