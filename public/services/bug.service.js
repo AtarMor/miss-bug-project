@@ -12,11 +12,12 @@ export const bugService = {
     save,
     remove,
     getDefaultFilter,
-    getDefaultSort
+    getDefaultSort,
+    getUserBugs
 }
 
 function query(filterBy = getDefaultFilter(), sortBy = getDefaultSort()) {
-    return axios.get(BASE_URL, { params: {...filterBy, ...sortBy} })
+    return axios.get(BASE_URL, { params: { ...filterBy, ...sortBy } })
         .then(res => res.data)
         .catch(err => {
             console.log('query, err:', err)
@@ -45,6 +46,15 @@ function getById(bugId) {
         .then(res => res.data)
         .catch(err => {
             console.log('getById, err:', err)
+        })
+}
+
+function getUserBugs(userId) {
+    console.log('/api/' + userId + '/bug')
+    return axios.get('/api/user/' + userId + '/bug')
+        .then(res => res.data)
+        .catch(err => {
+            console.log('getUserBugs, err:', err)
         })
 }
 

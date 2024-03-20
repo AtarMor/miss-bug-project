@@ -39,6 +39,19 @@ app.get('/api/bug', (req, res) => {
         })
 })
 
+app.get('/api/user/:id/bug', (req, res) => {
+    const userId = req.params.id
+
+    bugService.getUserBugs(userId)
+        .then(bugs => {
+            res.send(bugs)
+        })
+        .catch(err => {
+            loggerService.error('Cannot get bugs', err)
+            res.status(400).send('Cannot get bugs')
+        })
+})
+
 app.put('/api/bug', (req, res) => {
     const loggedInUser = userService.validateToken(req.cookies.loginToken)
     if (!loggedInUser) return res.status(401).send('Cannot add bug')

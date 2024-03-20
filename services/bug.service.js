@@ -6,7 +6,8 @@ export const bugService = {
     query,
     save,
     getById,
-    remove
+    remove,
+    getUserBugs
 }
 
 const PAGE_SIZE = 3
@@ -68,6 +69,12 @@ function getById(id) {
     const bug = bugs.find(bug => bug._id === id)
     if (!bug) return Promise.reject('Bug does not exist!')
     return Promise.resolve(bug)
+}
+
+function getUserBugs(userId) {
+    const userBugs = bugs.filter(bug => bug.creator._id === userId)
+    if (!userBugs) return Promise.reject('You have no bugs')
+    return Promise.resolve(userBugs)
 }
 
 function remove(id, loggedInUser) {
