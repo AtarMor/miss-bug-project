@@ -16,8 +16,6 @@ export const bugService = {
 }
 
 function query(filterBy = getDefaultFilter(), sortBy = getDefaultSort()) {
-            console.log('filterBy in Load:', filterBy)
-
     return axios.get(BASE_URL, { params: {...filterBy, ...sortBy} })
         .then(res => res.data)
         .catch(err => {

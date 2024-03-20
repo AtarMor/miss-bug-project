@@ -14,7 +14,6 @@ const PAGE_SIZE = 2
 const bugs = utilService.readJsonFile('data/bug.json')
 
 function query(filterBy, sortBy) {
-    console.log('filterBy:', filterBy)
     let bugsToReturn = bugs
     if (filterBy) bugsToReturn = filterBugs(bugsToReturn, filterBy)
     if (sortBy) bugsToReturn = sortBugs(bugsToReturn, sortBy)
@@ -28,7 +27,6 @@ function query(filterBy, sortBy) {
 }
 
 function filterBugs(bugsToReturn, filterBy) {
-    console.log('filterBy from bsckService:', filterBy)
     if (filterBy.title) {
         const regex = new RegExp(filterBy.title, 'i')
         bugsToReturn = bugsToReturn.filter(bug => regex.test(bug.title))
@@ -40,7 +38,6 @@ function filterBugs(bugsToReturn, filterBy) {
         const regex = new RegExp(filterBy.desc, 'i')
         bugsToReturn = bugsToReturn.filter(bug => regex.test(bug.description))
     }
-    console.log('filterBy.labels:', filterBy.labels)
     if (filterBy.labels && filterBy.labels.length) {
         filterBy.labels.forEach(label => {
             bugsToReturn = bugsToReturn.filter(bug => {
@@ -67,9 +64,7 @@ function sortBugs(bugsToReturn, sortBy) {
 }
 
 function getById(id) {
-    console.log('id:', id)
     const bug = bugs.find(bug => bug._id === id)
-    console.log('bug:', bug)
     if (!bug) return Promise.reject('Bug does not exist!')
     return Promise.resolve(bug)
 }
