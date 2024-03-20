@@ -39,8 +39,11 @@ app.get('/api/bug', (req, res) => {
 })
 
 app.put('/api/bug', (req, res) => {
+    const loggedInUser = userService.validateToken(req.cookies.loginToken)
+    if (!loggedInUser) return res.status(401).send('Cannot add bug')
+
     const bugToSave = req.body
-    bugService.save(bugToSave)
+    bugService.save(bugToSave, loggedInUser)
         .then(bug => res.send(bug))
         .catch(err => {
             loggerService.error('Cannot save bug', err)
@@ -49,8 +52,11 @@ app.put('/api/bug', (req, res) => {
 })
 
 app.post('/api/bug', (req, res) => {
+    const loggedInUser = userService.validateToken(req.cookies.loginToken)
+    if (!loggedInUser) return res.status(401).send('Cannot add bug')
+
     const bugToSave = req.body
-    bugService.save(bugToSave)
+    bugService.save(bugToSave, loggedInUser)
         .then(bug => res.send(bug))
         .catch((err) => {
             loggerService.error('Cannot save bug', err)
@@ -80,8 +86,11 @@ app.get('/api/bug/:id', (req, res) => {
 })
 
 app.delete('/api/bug/:id', (req, res) => {
+    const loggedInUser = userService.validateToken(req.cookies.loginToken)
+    if (!loggedInUser) return res.status(401).send('Cannot add bug')
+    
     const bugId = req.params.id
-    bugService.remove(bugId)
+    bugService.remove(bugId, loggedInUser)
         .then(() => res.send(bugId))
         .catch((err) => {
             loggerService.error('Cannot remove bug', err)
