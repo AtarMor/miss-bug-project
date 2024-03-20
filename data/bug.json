@@ -1,5 +1,18 @@
 [
     {
+        "title": "bugy",
+        "severity": 4,
+        "description": "bug bug",
+        "_id": "nGHMo",
+        "createdAt": 1710958480956,
+        "creator": {
+            "username": "atar",
+            "password": "atar",
+            "fullName": "",
+            "_id": "fEk0i"
+        }
+    },
+    {
         "_id": "dj2f7e",
         "title": "Cannot save a new car",
         "severity": 3,
