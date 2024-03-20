@@ -18,11 +18,17 @@ function query(filterBy, sortBy) {
     let bugsToReturn = bugs
     if (filterBy) bugsToReturn = filterBugs(bugsToReturn, filterBy)
     if (sortBy) bugsToReturn = sortBugs(bugsToReturn, sortBy)
+    if (filterBy.pageIdx !== undefined) {
+        const pageIdx = +filterBy.pageIdx
+        const startIdx = pageIdx * PAGE_SIZE
+        bugsToReturn = bugsToReturn.slice(startIdx, startIdx + PAGE_SIZE)
+    }
 
     return Promise.resolve(bugsToReturn)
 }
 
 function filterBugs(bugsToReturn, filterBy) {
+    console.log('filterBy from bsckService:', filterBy)
     if (filterBy.title) {
         const regex = new RegExp(filterBy.title, 'i')
         bugsToReturn = bugsToReturn.filter(bug => regex.test(bug.title))
@@ -37,7 +43,8 @@ function filterBugs(bugsToReturn, filterBy) {
     console.log('filterBy.labels:', filterBy.labels)
     if (filterBy.labels && filterBy.labels.length) {
         filterBy.labels.forEach(label => {
-            bugsToReturn = bugsToReturn.filter(bug => bug.labels.includes(label))
+            bugsToReturn = bugsToReturn.filter(bug => {
+                if(bug.labels) return bug.labels.includes(label)})
         })
     }
     // if (filterBy.label) {
@@ -45,12 +52,6 @@ function filterBugs(bugsToReturn, filterBy) {
     //         bug.labels.some(label =>
     //             label.includes(filterBy.label)))
     // }
-
-    if (filterBy.pageIdx !== undefined) {
-        const pageIdx = +filterBy.pageIdx
-        const startIdx = pageIdx * PAGE_SIZE
-        bugsToReturn = bugsToReturn.slice(startIdx, startIdx + PAGE_SIZE)
-    }
     return bugsToReturn
 }
 

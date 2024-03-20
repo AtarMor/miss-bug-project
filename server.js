@@ -13,12 +13,13 @@ app.use(express.json())
 app.listen(3030, () => console.log('Server ready at port 3030'))
 
 app.get('/api/bug', (req, res) => {
+    console.log('req.query:', req.query)
     const filterBy = {
         title: req.query.title || '',
         desc: req.query.desc || '',
         minSeverity: +req.query.minSeverity || 0,
-        labels: req.query.labels.split(',') || [],
-        pageIdx: req.query.pageIdx || 0
+        labels: req.query.labels || '',
+        pageIdx: req.query.pageIdx
     }
     const sortBy = {
         sortBy: req.query.sortBy,
