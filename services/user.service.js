@@ -1,6 +1,6 @@
 import fs from 'fs'
 import Cryptr from 'cryptr'
-import {utilService} from './util.service.js'
+import {utilService} from './utils.service.js'
 
 const cryptr = new Cryptr(process.env.SECRET1 || 'secret-puk-1234')
 const users = utilService.readJsonFile('data/user.json')
@@ -33,7 +33,7 @@ function checkLogin({ username, password }) {
     if (user)  {
         user = {
             _id : user._id,
-            fullname : user.fullname,
+            fullName : user.fullName,
             isAdmin : user.isAdmin,
         }
     }
